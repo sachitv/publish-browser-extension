@@ -92,15 +92,15 @@ export class EdgeApi {
     token: EdgeTokenDetails;
   }): Promise<void> {
     const endpoint = `https://api.addons.microsoftedge.microsoft.com/v1/products/${params.productId}/submissions`;
-    const res = await fetch.native(endpoint, {
-      method: 'POST',
-      body: JSON.stringify({}),
-      headers: this.getAuthHeaders(params.token),
-    });
-    if (!res.ok) {
-      console.log(await res.text());
+    try {
+      await fetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify({}),
+        headers: this.getAuthHeaders(params.token),
+      });
+    } catch (err) {
       throw Error(
-        `Edge API returned ${res.status} ${res.statusText} for ${endpoint}.`,
+        `Edge API failed to publish for ${endpoint}. ${err instanceof Error ? err.message : String(err)}`,
       );
     }
   }
