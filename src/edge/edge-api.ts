@@ -99,9 +99,7 @@ export class EdgeApi {
         headers: this.getAuthHeaders(params.token),
       });
     } catch (err) {
-      throw Error(
-        `Edge API failed to publish for ${endpoint}. ${err instanceof Error ? err.message : String(err)}`,
-      );
+      throw new Error(`Edge API failed to publish: ${err}`);
     }
   }
 
