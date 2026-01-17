@@ -92,7 +92,7 @@ export class EdgeApi {
     token: EdgeTokenDetails;
   }): Promise<void> {
     const endpoint = `https://api.addons.microsoftedge.microsoft.com/v1/products/${params.productId}/submissions`;
-    const res = await fetch.raw(endpoint, {
+    const res = await fetch.native(endpoint, {
       method: 'POST',
       body: JSON.stringify({}),
       headers: this.getAuthHeaders(params.token),
